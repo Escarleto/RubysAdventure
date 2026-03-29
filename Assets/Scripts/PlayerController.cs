@@ -6,29 +6,20 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float MoveSpd = 5.0f;
 
-    [SerializeField] private readonly float MoveSpd = 5.0f;
-
+    [SerializeField] private InputAction MoveInput;
+    
+    
     private void Start()
     {
-        
+        MoveInput.Enable();
     }
 
     private void Update()
     {
-        float HorInput = 0.0f;
-        if (Keyboard.current.aKey.isPressed)
-            HorInput = -1.0f;
-        else if (Keyboard.current.dKey.isPressed)
-            HorInput = 1.0f;
+        Vector2 Movement = MoveInput.ReadValue<Vector2>() * MoveSpd;
 
-        float VerInput = 0.0f;
-        if (Keyboard.current.wKey.isPressed)
-            VerInput = 1.0f;
-        else if (Keyboard.current.sKey.isPressed)
-            VerInput = -1.0f;
-
-        transform.position += new Vector3(HorInput, VerInput, 0f) * Time.deltaTime * MoveSpd;
-
+        transform.position += new Vector3(Movement.x, Movement.y, 0f) * Time.deltaTime;
     }
 }
