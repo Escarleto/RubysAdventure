@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
 
     // Vida
     [SerializeField] private int MaxHP = 5;
-    private float CurrentHP = 5;
+    private float CurrentHP;
     
     private void Start()
     {
@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
         Application.targetFrameRate = 60;
         MoveInput.Enable();
         Rb = GetComponent<Rigidbody2D>();
+
+        CurrentHP = MaxHP;
     }
 
     private void Update()
@@ -35,9 +37,9 @@ public class PlayerController : MonoBehaviour
         Rb.MovePosition(Rb.position + Movement * Time.fixedDeltaTime);
     }
 
-    public void UpdateHP(float Amount)
+    public void ChangeHP(int Amount)
     {
-        CurrentHP -= Amount;
+        CurrentHP += Amount;
         CurrentHP = Mathf.Clamp(CurrentHP, 0, MaxHP);
         /*if (CurrentHP <= 0)
         {
