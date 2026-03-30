@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float MoveSpd = 5.0f;
 
     [SerializeField] private InputAction MoveInput;
+    private Vector2 Movement;
+    private Rigidbody2D Rb;
     
     
     private void Start()
@@ -16,12 +18,16 @@ public class PlayerController : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         MoveInput.Enable();
+        Rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
     {
-        Vector2 Movement = MoveInput.ReadValue<Vector2>() * MoveSpd;
+        Movement = MoveInput.ReadValue<Vector2>() * MoveSpd;
+    }
 
-        transform.position += new Vector3(Movement.x, Movement.y, 0f) * Time.deltaTime;
+    private void FixedUpdate()
+    {
+        Rb.MovePosition(Rb.position + Movement * Time.fixedDeltaTime);
     }
 }
