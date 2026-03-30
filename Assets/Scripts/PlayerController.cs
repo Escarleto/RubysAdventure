@@ -6,12 +6,15 @@ using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float MoveSpd = 5.0f;
-
+    // Movimento   
     [SerializeField] private InputAction MoveInput;
     private Vector2 Movement;
+    [SerializeField] private float MoveSpd = 3.5f;
     private Rigidbody2D Rb;
-    
+
+    // Vida
+    [SerializeField] private int MaxHP = 5;
+    private float CurrentHP = 5;
     
     private void Start()
     {
@@ -29,5 +32,16 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Rb.MovePosition(Rb.position + Movement * Time.fixedDeltaTime);
+        Rb.MovePosition(Rb.position + Movement * Time.fixedDeltaTime);
+    }
+
+    public void UpdateHP(float Amount)
+    {
+        CurrentHP -= Amount;
+        CurrentHP = Mathf.Clamp(CurrentHP, 0, MaxHP);
+        /*if (CurrentHP <= 0)
+        {
+            
+        }*/
     }
 }
