@@ -13,8 +13,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D Rb;
 
     // Vida
-    [SerializeField] private int MaxHP = 5;
-    private float CurrentHP;
+    public int MaxHP = 5;
+    public int HP { get { return CurrentHP; } }
+    private int CurrentHP;
     
     private void Start()
     {
@@ -39,8 +40,7 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeHP(int Amount)
     {
-        CurrentHP += Amount;
-        CurrentHP = Mathf.Clamp(CurrentHP, 0, MaxHP);
+        CurrentHP = Mathf.Clamp(CurrentHP + Amount, 0, MaxHP);
         /*if (CurrentHP <= 0)
         {
             
