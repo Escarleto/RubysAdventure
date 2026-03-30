@@ -6,7 +6,7 @@ public class CollectibleHealth : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(!collision.CompareTag("Player")) return;
+        if (!collision.GetComponent<PlayerController>()) return;
 
         PlayerController Player = collision.GetComponent<PlayerController>();
 

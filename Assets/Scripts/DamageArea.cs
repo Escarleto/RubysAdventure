@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class DamageArea : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        if (!collision.CompareTag("Player")) return;
+        if (!collision.GetComponent<PlayerController>()) return;
 
-        PlayerController Player = collision.GetComponent<PlayerController>();
-
-        if (Player.HP < Player.MaxHP)
-        {
-            Player.ChangeHP(-1);
-            Destroy(gameObject);
-        }
+        collision.GetComponent<PlayerController>().ChangeHP(-1);
     }
 }

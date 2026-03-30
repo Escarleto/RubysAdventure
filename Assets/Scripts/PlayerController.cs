@@ -47,12 +47,15 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Rb.MovePosition(Rb.position + Movement * Time.fixedDeltaTime);
-        Rb.MovePosition(Rb.position + Movement * Time.fixedDeltaTime);
     }
 
     public void ChangeHP(int Amount)
     {
+        if (IsInvulnerable && Amount < 0) return;
+
         CurrentHP = Mathf.Clamp(CurrentHP + Amount, 0, MaxHP);
+        
+        UIManager.Instance.UpdateHPBar((float)CurrentHP / MaxHP);
 
         if (Amount < 0 && !IsInvulnerable)
         {
