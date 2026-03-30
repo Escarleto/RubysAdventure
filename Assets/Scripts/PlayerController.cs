@@ -16,7 +16,12 @@ public class PlayerController : MonoBehaviour
     public int MaxHP = 5;
     public int HP { get { return CurrentHP; } }
     private int CurrentHP;
-    
+
+    // I-frames
+    private readonly float IFramesDuration = 2.0f;
+    private bool IsInvulnerable = false;
+    private float DamageCooldown;
+
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
@@ -30,6 +35,13 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         Movement = MoveInput.ReadValue<Vector2>() * MoveSpd;
+
+        if (IsInvulnerable)
+        {
+            DamageCooldown -= Time.deltaTime;
+            if (DamageCooldown <= 0)
+                IsInvulnerable = false;
+        }
     }
 
     private void FixedUpdate()
@@ -41,6 +53,13 @@ public class PlayerController : MonoBehaviour
     public void ChangeHP(int Amount)
     {
         CurrentHP = Mathf.Clamp(CurrentHP + Amount, 0, MaxHP);
+
+        if (Amount < 0 && !IsInvulnerable)
+        {
+            IsInvulnerable = true;
+            DamageCooldown = IFramesDuration;
+        }
+
         /*if (CurrentHP <= 0)
         {
             
