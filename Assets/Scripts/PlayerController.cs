@@ -9,9 +9,9 @@ public class PlayerController : MonoBehaviour
     // Movimento   
     [SerializeField] private InputAction MoveInput;
     private Vector2 Movement;
+    private Vector2 LastMoveDir;
     [SerializeField] private float MoveSpd = 3.5f;
-    private Rigidbody2D Rb;
-
+    
     // Vida
     public int MaxHP = 5;
     public int HP { get { return CurrentHP; } }
@@ -22,12 +22,18 @@ public class PlayerController : MonoBehaviour
     private bool IsInvulnerable = false;
     private float DamageCooldown;
 
+    // Componentes
+    private Rigidbody2D Rb;
+    private Animator AnimationPlayer;
+
     private void Start()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         MoveInput.Enable();
         Rb = GetComponent<Rigidbody2D>();
+        AnimationPlayer = GetComponent<Animator>();
+        LastMoveDir = Vector2.down;
 
         CurrentHP = MaxHP;
     }
@@ -36,12 +42,19 @@ public class PlayerController : MonoBehaviour
     {
         Movement = MoveInput.ReadValue<Vector2>() * MoveSpd;
 
+        if (Movement != Vector2.zero)
+            LastMoveDir = Movement.normalized;
+
         if (IsInvulnerable)
         {
             DamageCooldown -= Time.deltaTime;
             if (DamageCooldown <= 0)
                 IsInvulnerable = false;
         }
+
+        AnimationPlayer.SetFloat("DirX", LastMoveDir.x);
+        AnimationPlayer.SetFloat("DirY", LastMoveDir.y);
+        AnimationPlayer.SetFloat("Speed", Movement.sqrMagnitude);
     }
 
     private void FixedUpdate()
@@ -61,6 +74,7 @@ public class PlayerController : MonoBehaviour
         {
             IsInvulnerable = true;
             DamageCooldown = IFramesDuration;
+            AnimationPlayer.SetTrigger("Hit");
         }
 
         /*if (CurrentHP <= 0)

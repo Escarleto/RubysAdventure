@@ -36,11 +36,18 @@ public class EnemyMovement : MonoBehaviour
         Vector2 Movement = Rb.position;
 
         if (VerticalMove)
+        {
             Movement.y = Movement.y + MoveSpd * MoveDir * Time.deltaTime;
+            AnimationPlayer.SetFloat("MoveX", 0);
+            AnimationPlayer.SetFloat("MoveY", MoveDir);
+        }
         else
+        {
             Movement.x = Movement.x + MoveSpd * MoveDir * Time.deltaTime;
+            AnimationPlayer.SetFloat("MoveX", MoveDir);
+            AnimationPlayer.SetFloat("MoveY", 0);
+        }
 
-        AnimationPlayer.SetInteger("Dir", MoveDir); 
         Rb.MovePosition(Movement);
     }
 }
