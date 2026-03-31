@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3927929113626249413}
   - component: {fileID: 4460373619747312391}
   - component: {fileID: 7601071419014110202}
+  - component: {fileID: 5900770573104058771}
   - component: {fileID: 3500243640058676818}
   - component: {fileID: 2523001241495533011}
   m_Layer: 0
@@ -115,6 +116,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &5900770573104058771
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3321900562655900289}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 227a3ca2bc4ae0c47a4b7ec774965445, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!70 &3500243640058676818
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

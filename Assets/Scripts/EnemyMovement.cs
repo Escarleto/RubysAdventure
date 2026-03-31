@@ -9,12 +9,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float ChangeTime = 3.0f;
 
     private Rigidbody2D Rb;
+    private Animator AnimationPlayer;
     private float Timer;
     private int MoveDir = 1;
 
     private void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
+        AnimationPlayer = GetComponent<Animator>();
         Timer = ChangeTime;
     }
 
@@ -38,6 +40,7 @@ public class EnemyMovement : MonoBehaviour
         else
             Movement.x = Movement.x + MoveSpd * MoveDir * Time.deltaTime;
 
+        AnimationPlayer.SetInteger("Dir", MoveDir); 
         Rb.MovePosition(Movement);
     }
 }
