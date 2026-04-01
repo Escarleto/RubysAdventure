@@ -5,14 +5,15 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     [SerializeField] private float MoveSpd;
+    private int MoveDir = 1;
     [SerializeField] private bool VerticalMove;
     [SerializeField] private float ChangeTime = 3.0f;
+    private float Timer;
+    private bool IsDead = false;
 
     private Rigidbody2D Rb;
     private Animator AnimationPlayer;
-    private float Timer;
-    private int MoveDir = 1;
-
+    
     private void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
@@ -33,6 +34,8 @@ public class EnemyMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (IsDead) return;
+
         Vector2 Movement = Rb.position;
 
         if (VerticalMove)
@@ -49,6 +52,14 @@ public class EnemyMovement : MonoBehaviour
         }
 
         Rb.MovePosition(Movement);
+    }
+
+    public void Die()
+    {
+        IsDead = true;
+        Rb.simulated = false;
+        GetComponent<CapsuleCollider2D>().enabled = false;
+        AnimationPlayer.SetTrigger("Died");
     }
 }
 
