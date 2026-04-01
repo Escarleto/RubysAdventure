@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
 
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour
     // Componentes
     private Rigidbody2D Rb;
     private Animator AnimationPlayer;
+    [SerializeField] private GameObject Projectile;
 
     private void Start()
     {
@@ -44,6 +46,9 @@ public class PlayerController : MonoBehaviour
 
         if (Movement != Vector2.zero)
             LastMoveDir = Movement.normalized;
+
+        if (Input.GetKeyDown(KeyCode.C))
+            Shoot();
 
         if (IsInvulnerable)
         {
@@ -81,5 +86,12 @@ public class PlayerController : MonoBehaviour
         {
             
         }*/
+    }
+    
+    private void Shoot()
+    {
+        GameObject ProjectileInstance = Instantiate(Projectile, transform.position, Quaternion.identity);
+        ProjectileInstance.GetComponent<ProjectilePlayer>().Launch(LastMoveDir, 10f);
+        AnimationPlayer.SetTrigger("Launch");
     }
 }

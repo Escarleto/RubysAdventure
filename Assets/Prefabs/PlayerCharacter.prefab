@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5507603446504380481}
   - component: {fileID: 7295056104497174669}
   - component: {fileID: 6089749751435616286}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PlayerCharacter
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -139,6 +139,8 @@ MonoBehaviour:
     m_Flags: 0
   MoveSpd: 3.5
   MaxHP: 5
+  Projectile: {fileID: 4249223793680078112, guid: 90408b64ca8e0034eaba5d64060959a4,
+    type: 3}
 --- !u!95 &1653661195185109887
 Animator:
   serializedVersion: 5
