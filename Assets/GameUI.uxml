@@ -1,8 +1,10 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <ui:Template name="DialogueUI" src="project://database/Assets/DialogueUI.uxml?fileID=9197481963319205126&amp;guid=bd25de4801bd8f54a84a0388ec6d6a74&amp;type=3#DialogueUI" />
     <ui:VisualElement name="HealthBarBackground" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/UnityTechnologies/StarterAsset/Art/Ruby/UI/UIHealthFrame.png?fileID=21300000&amp;guid=e04807cd45105ec409b00463fe6ab7b1&amp;type=3#UIHealthFrame&quot;); width: 25%; height: 20%; -unity-background-scale-mode: scale-to-fit;">
         <ui:VisualElement name="HealthBarContainer" style="flex-grow: 1; -unity-background-scale-mode: scale-to-fit; width: 54%; height: 32%; display: flex; position: absolute; top: 69px; left: 200px;">
             <ui:VisualElement name="HealthBar" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UnityTechnologies/2DBeginnerAdventureGame/Art/Ruby/UI/UIHealthBar.png?fileID=21300000&amp;guid=292bb6b60652e5541aa6fd8507b5087e&amp;type=3#UIHealthBar&quot;); -unity-background-scale-mode: scale-and-crop; width: 100%; height: 100%; display: flex;" />
         </ui:VisualElement>
         <ui:VisualElement name="CharacterPortrait" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/UnityTechnologies/2DBeginnerAdventureGame/Art/Ruby/UI/CharacterPortrait.png?fileID=21300000&amp;guid=ec73128b64458a947a9603ad250e5956&amp;type=3#CharacterPortrait&quot;); -unity-background-scale-mode: scale-to-fit; height: 194px; width: 174px; position: absolute; top: -2px; left: 39px;" />
     </ui:VisualElement>
+    <ui:Instance template="DialogueUI" name="DialogueUI" style="position: absolute; top: 808px; left: 376px; width: 75%; height: 25%;" />
 </ui:UXML>

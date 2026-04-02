@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
     // Movimento   
     [SerializeField] private InputAction MoveInput;
+    [SerializeField] private InputAction TalkInput;
     private Vector2 Movement;
     private Vector2 LastMoveDir;
     [SerializeField] private float MoveSpd = 3.5f;
@@ -33,6 +35,7 @@ public class PlayerController : MonoBehaviour
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
         MoveInput.Enable();
+        TalkInput.Enable();
         Rb = GetComponent<Rigidbody2D>();
         AnimationPlayer = GetComponent<Animator>();
         LastMoveDir = Vector2.down;
@@ -49,6 +52,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.C))
             Shoot();
+        if (Input.GetKeyDown(KeyCode.X))
+            FindNPC();
 
         if (IsInvulnerable)
         {
@@ -93,5 +98,19 @@ public class PlayerController : MonoBehaviour
         GameObject ProjectileInstance = Instantiate(Projectile, transform.position, Quaternion.identity);
         ProjectileInstance.GetComponent<ProjectilePlayer>().Launch(LastMoveDir, 10f);
         AnimationPlayer.SetTrigger("Launch");
+    }
+
+    private void FindNPC()
+    {
+        RaycastHit2D Hit = Physics2D.Raycast(Rb.position + Vector2.up * 0.2f, LastMoveDir, 1.5f, LayerMask.GetMask("NPC"));
+
+        if (Hit.collider != null)
+        {
+            NPCBehavior Character = Hit.collider.GetComponent<NPCBehavior>();
+            if (Character != null)
+            {
+                UIManager.Instance.DisplayDialogueBox();
+            }
+        }
     }
 }
