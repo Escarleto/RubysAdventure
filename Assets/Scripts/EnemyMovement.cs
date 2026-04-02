@@ -14,6 +14,7 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody2D Rb;
     private Animator AnimationPlayer;
     private AudioSource Audio;
+    [SerializeField] private ParticleSystem Smoke;
 
     private void Start()
     {
@@ -21,6 +22,7 @@ public class EnemyMovement : MonoBehaviour
         AnimationPlayer = GetComponent<Animator>();
         Audio = GetComponent<AudioSource>();
         Audio.Play();
+        Smoke.Stop();
         Timer = ChangeTime;
     }
 
@@ -61,6 +63,7 @@ public class EnemyMovement : MonoBehaviour
     {
         IsDead = true;
         Rb.simulated = false;
+        Smoke.Play();
         GetComponent<CapsuleCollider2D>().enabled = false;
         Audio.Stop();
         AnimationPlayer.SetTrigger("Died");
