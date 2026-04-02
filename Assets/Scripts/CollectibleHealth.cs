@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CollectibleHealth : MonoBehaviour
 {
+    [SerializeField] private AudioClip CollectSound;
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.GetComponent<PlayerController>()) return;
@@ -13,6 +15,7 @@ public class CollectibleHealth : MonoBehaviour
         if (Player.HP < Player.MaxHP)
         {
             Player.ChangeHP(1);
+            Player.PlaySound(CollectSound);
             Destroy(gameObject);
         }      
     }

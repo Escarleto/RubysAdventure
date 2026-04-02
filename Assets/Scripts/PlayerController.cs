@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D Rb;
     private Animator AnimationPlayer;
     [SerializeField] private GameObject Projectile;
+    private AudioSource Audio;
 
     private void Start()
     {
@@ -38,6 +39,7 @@ public class PlayerController : MonoBehaviour
         TalkInput.Enable();
         Rb = GetComponent<Rigidbody2D>();
         AnimationPlayer = GetComponent<Animator>();
+        Audio = GetComponent<AudioSource>();
         LastMoveDir = Vector2.down;
 
         CurrentHP = MaxHP;
@@ -112,5 +114,10 @@ public class PlayerController : MonoBehaviour
                 UIManager.Instance.DisplayDialogueBox();
             }
         }
+    }
+
+    public void PlaySound(AudioClip Clip)
+    {
+        Audio.PlayOneShot(Clip);
     }
 }

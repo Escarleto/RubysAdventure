@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5507603446504380481}
   - component: {fileID: 7295056104497174669}
   - component: {fileID: 6089749751435616286}
+  - component: {fileID: 226056038340634053}
   m_Layer: 8
   m_Name: PlayerCharacter
   m_TagString: Player
@@ -136,6 +137,15 @@ MonoBehaviour:
       m_Groups: 
       m_Action: Move Input
       m_Flags: 8
+    m_Flags: 0
+  TalkInput:
+    m_Name: Talk Input
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 88751c94-ba29-466b-b23a-a5805393be15
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
     m_Flags: 0
   MoveSpd: 3.5
   MaxHP: 5
@@ -286,3 +296,11 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7493018, y: 0.8276317}
   m_EdgeRadius: 0
+--- !u!81 &226056038340634053
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2365661635469986983}
+  m_Enabled: 1

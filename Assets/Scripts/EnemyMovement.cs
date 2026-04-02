@@ -13,11 +13,14 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody2D Rb;
     private Animator AnimationPlayer;
-    
+    private AudioSource Audio;
+
     private void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
         AnimationPlayer = GetComponent<Animator>();
+        Audio = GetComponent<AudioSource>();
+        Audio.Play();
         Timer = ChangeTime;
     }
 
@@ -59,6 +62,7 @@ public class EnemyMovement : MonoBehaviour
         IsDead = true;
         Rb.simulated = false;
         GetComponent<CapsuleCollider2D>().enabled = false;
+        Audio.Stop();
         AnimationPlayer.SetTrigger("Died");
     }
 }
